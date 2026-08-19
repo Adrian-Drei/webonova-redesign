@@ -1,0 +1,1 @@
+export default defineEventHandler(event=>{setHeader(event,'content-type','application/xml');return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['','work','pricing','contact'].map(x=>`<url><loc>https://webonova.ph/${x}</loc></url>`).join('')}</urlset>`})

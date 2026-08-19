@@ -1,7 +1,4 @@
-<template>
-  <div>
-    <main>
-      <slot />
-    </main>
-  </div>
-</template>
+<script setup lang="ts">
+const route=useRoute(); const open=ref(false); watch(()=>route.fullPath,()=>open.value=false); watch(open,v=>{if(import.meta.client)document.body.style.overflow=v?'hidden':''}); const nav=[['Services','/#services'],['Process','/#process'],['Pricing','/pricing'],['Work','/work']]
+</script>
+<template><div><a class="skip" href="#main">Skip to content</a><header class="header"><NuxtLink class="logo" to="/">WEBONOVA</NuxtLink><span class="place">MANILA / PH</span><nav aria-label="Primary"><NuxtLink v-for="n in nav" :key="n[0]" :to="n[1]">{{n[0]}}</NuxtLink><NuxtLink class="btn" to="/contact">Start a project →</NuxtLink></nav><NuxtLink class="mobile-cta" to="/contact">Start a project</NuxtLink><button class="menu" :aria-expanded="open" aria-controls="mobile-nav" @click="open=!open">{{open?'Close':'Menu'}}</button></header><nav v-if="open" id="mobile-nav" class="mobile-nav"><NuxtLink v-for="n in nav" :key="n[0]" :to="n[1]">{{n[0]}}</NuxtLink><NuxtLink to="/contact">Start a project →</NuxtLink></nav><main id="main"><slot></slot></main><footer><div><strong>WEBONOVA</strong><small>DIGITAL ATELIER<br>FOR DESIGN & DEVELOPMENT<br>WEB DESIGN & APPLICATIONS</small><small>© 2026 Webonova. All rights reserved.</small></div><div><b>SERVICES</b><NuxtLink to="/contact?service=new-website">Launch</NuxtLink><NuxtLink to="/contact?service=redesign">Redesign</NuxtLink><NuxtLink to="/contact?service=platform">Commerce</NuxtLink><NuxtLink to="/contact?service=support">Maintenance</NuxtLink><NuxtLink to="/contact?package=studio-hours">Hourly Support</NuxtLink></div><div><b>COMPANY</b><NuxtLink to="/work">Work</NuxtLink><NuxtLink to="/#process">Process</NuxtLink><NuxtLink to="/pricing">Pricing</NuxtLink><NuxtLink to="/contact">Contact</NuxtLink></div><div><b>CONTACT</b><a href="mailto:webonovatech@gmail.com">webonovatech@gmail.com</a><span>Manila, Philippines</span></div></footer></div></template>
