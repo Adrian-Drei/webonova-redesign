@@ -5,10 +5,6 @@ usePageSeo({
   description:
     "Explore Webonova website projects across hospitality, construction, booking, and events, including responsive client work and self-initiated digital concepts.",
   path: "/work",
-  image: "/projects/resort.webp",
-  imageAlt: "Private resort website featured in the Webonova portfolio",
-  imageWidth: 1500,
-  imageHeight: 746,
 });
 const route = useRoute(),
   router = useRouter();
