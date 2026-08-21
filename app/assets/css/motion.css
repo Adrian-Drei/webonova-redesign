@@ -1,50 +1,552 @@
-:root{--motion-fast:180ms;--motion-normal:280ms;--motion-slow:380ms;--ease-standard:ease;--ease-out:cubic-bezier(.22,1,.36,1)}
+:root {
+  --motion-fast: 200ms;
+  --motion-normal: 420ms;
+  --motion-slow: 720ms;
 
-/* Content remains visible in SSR and without JavaScript; only observer-bound elements are hidden. */
-.motion-reveal{opacity:0;transform:translateY(16px);transition:opacity 560ms var(--ease-out) var(--motion-delay,0ms)!important,transform 560ms var(--ease-out) var(--motion-delay,0ms)!important}
-.motion-reveal.is-revealed{opacity:1;transform:none}
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-image: cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-/* Nuxt page transitions. */
-.page-enter-active,.page-leave-active{transition:opacity 220ms var(--ease-standard),transform 220ms var(--ease-out)}
-.page-enter-from{opacity:0;transform:translateY(8px)}
-.page-leave-to{opacity:0;transform:translateY(-4px)}
+/* =========================================================
+   SCROLL REVEALS
+   ========================================================= */
 
-/* Restrained hero entrance sequence. */
-.nova-hero .kicker,.portfolio-hero>div>p,.pricing-hero>div:first-child>p,.contact-hero>div:first-child>p{animation:hero-enter var(--motion-slow) var(--ease-out) both}
-.nova-hero h1,.portfolio-hero h1,.pricing-hero h1,.contact-hero h1{animation:hero-enter var(--motion-slow) var(--ease-out) 60ms both}
-.nova-hero .hero-copy>p:not(.kicker),.portfolio-hero>div>span,.pricing-hero>div:first-child>span,.contact-hero>div:first-child>span{animation:hero-enter var(--motion-slow) var(--ease-out) 120ms both}
-.nova-hero .hero-actions,.portfolio-filters,.pricing-promises,.contact-hero>div:first-child>div{animation:hero-enter var(--motion-slow) var(--ease-out) 180ms both}
-.hero-showcase,.hero-contours,.pricing-visual,.contact-diagram{animation:hero-art-enter var(--motion-slow) var(--ease-out) 100ms both}
-@keyframes hero-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes hero-art-enter{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.motion-reveal {
+  --motion-delay: 0ms;
 
-/* Shared controls. */
-:where(.primary-cta,.orange-cta,.outline-cta,.outline-teal,.text-cta,.btn,button:not(.menu-toggle),.site-header a,.site-footer a){transition:color var(--motion-fast) var(--ease-standard),background-color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),box-shadow var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-out)}
-:where(.primary-cta,.orange-cta,.outline-cta,.outline-teal,.text-cta,.btn,button:not(.menu-toggle)):hover{transform:translateY(-1px)}
-:where(.primary-cta,.orange-cta,.outline-cta,.outline-teal,.text-cta,.btn,button:not(.menu-toggle)):active{transform:translateY(0)}
-:where(a,button,input,select,textarea,summary):focus-visible{outline:2px solid var(--teal-light);outline-offset:3px}
+  opacity: 0;
+  transform: translate3d(0, 18px, 0) scale(0.995);
+  transform-origin: center top;
 
-/* Project and pricing card feedback. */
-.preview-grid article,.portfolio-list article,.two-packages article{transition:transform var(--motion-fast) var(--ease-out),border-color var(--motion-fast) var(--ease-standard),box-shadow var(--motion-fast) var(--ease-standard)}
-.preview-grid article:hover,.portfolio-list article:hover,.two-packages article:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:0 10px 24px rgba(3,25,35,.1)}
-.preview-grid article,.project-shot{overflow:hidden}
-.preview-grid img,.project-shot img{transition:transform var(--motion-normal) var(--ease-out)}
-.preview-grid article:hover img,.portfolio-list article:hover .project-shot img{transform:scale(1.03)}
-.preview-grid h3,.project-copy h2,.preview-grid a,.project-copy>a{transition:color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-out)}
-.preview-grid article:hover h3,.portfolio-list article:hover .project-copy h2{color:var(--teal)}
-.preview-grid article:hover a,.portfolio-list article:hover .project-copy>a{transform:translateX(4px)}
+  transition:
+    opacity 600ms var(--ease-standard) var(--motion-delay),
+    transform 850ms var(--ease-out) var(--motion-delay);
 
-/* FAQ, forms, and restrained dashboard states. */
-.pricing-faq article button,.contact-faq article button{transition:color var(--motion-normal) var(--ease-standard)}
-.pricing-faq article button[aria-expanded=true],.contact-faq article button[aria-expanded=true]{color:var(--teal)}
-.pricing-faq article button>span:last-child,.contact-faq article button>span:last-child{transition:transform var(--motion-normal) var(--ease-out)}
-.faq-answer{transition:grid-template-rows var(--motion-normal) var(--ease-out)}
-.form-success,.form-error{animation:status-enter var(--motion-normal) var(--ease-out) both}
-.submit-inquiry{position:relative}
-.submit-inquiry.is-loading::after{content:'';width:14px;height:14px;margin-left:10px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;animation:submission-spin .7s linear infinite}
-@keyframes status-enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.admin-filters select,.detail-field select,.status-pill,.save-row span{transition:color var(--motion-fast) var(--ease-standard),background-color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),opacity var(--motion-fast) var(--ease-standard)}
-.inquiry-drawer-enter-active,.inquiry-drawer-leave-active{transition:opacity 250ms var(--ease-standard),transform 250ms var(--ease-out)}
-.inquiry-drawer-enter-from,.inquiry-drawer-leave-to{opacity:0;transform:translateX(20px)}
+  will-change: opacity, transform;
+}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0ms!important}.motion-reveal{opacity:1!important;transform:none!important}}
+.motion-reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Staggered reveal helpers */
+
+.motion-delay-1 {
+  --motion-delay: 60ms;
+}
+
+.motion-delay-2 {
+  --motion-delay: 120ms;
+}
+
+.motion-delay-3 {
+  --motion-delay: 180ms;
+}
+
+.motion-delay-4 {
+  --motion-delay: 240ms;
+}
+
+.motion-delay-5 {
+  --motion-delay: 300ms;
+}
+
+/* =========================================================
+   NUXT PAGE TRANSITIONS
+   ========================================================= */
+
+.page-enter-active {
+  transition:
+    opacity 360ms var(--ease-standard),
+    transform 520ms var(--ease-out);
+}
+
+.page-leave-active {
+  transition:
+    opacity 200ms var(--ease-standard),
+    transform 260ms var(--ease-standard);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+}
+
+.page-enter-to,
+.page-leave-from {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -4px, 0);
+}
+
+/* =========================================================
+   HERO ENTRANCE
+   ========================================================= */
+
+.nova-hero .kicker,
+.portfolio-hero > div > p,
+.pricing-hero > div:first-child > p,
+.contact-hero > div:first-child > p {
+  animation: hero-enter 650ms var(--ease-out) both;
+}
+
+.nova-hero h1,
+.portfolio-hero h1,
+.pricing-hero h1,
+.contact-hero h1 {
+  animation: hero-enter 780ms var(--ease-out) 90ms both;
+}
+
+.nova-hero .hero-copy > p:not(.kicker),
+.portfolio-hero > div > span,
+.pricing-hero > div:first-child > span,
+.contact-hero > div:first-child > span {
+  animation: hero-enter 760ms var(--ease-out) 180ms both;
+}
+
+.nova-hero .hero-actions,
+.portfolio-filters,
+.pricing-promises,
+.contact-hero > div:first-child > div {
+  animation: hero-enter 720ms var(--ease-out) 270ms both;
+}
+
+.hero-showcase,
+.hero-contours,
+.pricing-visual,
+.contact-diagram {
+  animation: hero-art-enter 950ms var(--ease-out) 160ms both;
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-art-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* =========================================================
+   SHARED INTERACTIVE CONTROLS
+   ========================================================= */
+
+:where(
+  .primary-cta,
+  .orange-cta,
+  .outline-cta,
+  .outline-teal,
+  .text-cta,
+  .btn,
+  button:not(.menu-toggle),
+  .site-header a,
+  .site-footer a
+) {
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-normal) var(--ease-standard),
+    transform var(--motion-normal) var(--ease-out);
+}
+
+:where(
+  .primary-cta,
+  .orange-cta,
+  .outline-cta,
+  .outline-teal,
+  .text-cta,
+  .btn,
+  button:not(.menu-toggle)
+):hover {
+  transform: translate3d(0, -1px, 0);
+}
+
+:where(
+  .primary-cta,
+  .orange-cta,
+  .outline-cta,
+  .outline-teal,
+  .text-cta,
+  .btn,
+  button:not(.menu-toggle)
+):active {
+  transform: translate3d(0, 0, 0);
+  transition-duration: 100ms;
+}
+
+/* Accessible keyboard focus */
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--teal-light);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   PROJECT AND PRICING CARDS
+   ========================================================= */
+
+.preview-grid article,
+.portfolio-list article,
+.two-packages article {
+  transition:
+    transform 420ms var(--ease-out),
+    border-color 240ms var(--ease-standard),
+    box-shadow 420ms var(--ease-standard);
+}
+
+.preview-grid article:hover,
+.portfolio-list article:hover,
+.two-packages article:hover {
+  transform: translate3d(0, -2px, 0);
+  border-color: var(--teal);
+  box-shadow: 0 14px 32px rgba(3, 25, 35, 0.09);
+}
+
+.preview-grid article,
+.project-shot {
+  overflow: hidden;
+}
+
+/* Project images */
+
+.preview-grid img,
+.project-shot img {
+  transition: transform 700ms var(--ease-image);
+  will-change: transform;
+}
+
+.preview-grid article:hover img,
+.portfolio-list article:hover .project-shot img {
+  transform: scale(1.025);
+}
+
+/* Project titles and links */
+
+.preview-grid h3,
+.project-copy h2,
+.preview-grid a,
+.project-copy > a {
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-normal) var(--ease-out);
+}
+
+.preview-grid article:hover h3,
+.portfolio-list article:hover .project-copy h2 {
+  color: var(--teal);
+}
+
+.preview-grid article:hover a,
+.portfolio-list article:hover .project-copy > a {
+  transform: translate3d(4px, 0, 0);
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+.pricing-faq article button,
+.contact-faq article button {
+  transition:
+    color var(--motion-normal) var(--ease-standard),
+    background-color var(--motion-normal) var(--ease-standard);
+}
+
+.pricing-faq article button[aria-expanded="true"],
+.contact-faq article button[aria-expanded="true"] {
+  color: var(--teal);
+}
+
+.pricing-faq article button > span:last-child,
+.contact-faq article button > span:last-child {
+  transition: transform var(--motion-normal) var(--ease-out);
+}
+
+.pricing-faq article button[aria-expanded="true"] > span:last-child,
+.contact-faq article button[aria-expanded="true"] > span:last-child {
+  transform: rotate(45deg);
+}
+
+/*
+ * The Vue template should switch between:
+ *
+ * grid-rows-[0fr]
+ * grid-rows-[1fr]
+ */
+
+.faq-answer {
+  display: grid;
+  transition: grid-template-rows 380ms var(--ease-out);
+}
+
+.faq-answer > div {
+  overflow: hidden;
+}
+
+/* =========================================================
+   FORM FEEDBACK
+   ========================================================= */
+
+.form-success,
+.form-error {
+  animation: status-enter 480ms var(--ease-out) both;
+}
+
+@keyframes status-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Submit button loader */
+
+.submit-inquiry {
+  position: relative;
+}
+
+.submit-inquiry.is-loading {
+  cursor: wait;
+}
+
+.submit-inquiry.is-loading::after {
+  content: "";
+  display: inline-block;
+
+  width: 14px;
+  height: 14px;
+  margin-left: 10px;
+
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  border-radius: 50%;
+
+  vertical-align: -2px;
+
+  animation: submission-spin 700ms linear infinite;
+}
+
+@keyframes submission-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form fields */
+
+:where(input, textarea, select) {
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
+}
+
+:where(input, textarea, select):focus {
+  border-color: var(--teal);
+}
+
+/* =========================================================
+   DASHBOARD CONTROLS
+   ========================================================= */
+
+.admin-filters select,
+.detail-field select,
+.status-pill,
+.save-row span {
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    opacity var(--motion-fast) var(--ease-standard);
+}
+
+/* Dashboard drawer */
+
+.inquiry-drawer-enter-active,
+.inquiry-drawer-leave-active {
+  transition:
+    opacity 280ms var(--ease-standard),
+    transform 420ms var(--ease-out);
+}
+
+.inquiry-drawer-enter-from,
+.inquiry-drawer-leave-to {
+  opacity: 0;
+  transform: translate3d(20px, 0, 0);
+}
+
+.inquiry-drawer-enter-to,
+.inquiry-drawer-leave-from {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Modal backdrop */
+
+.modal-backdrop-enter-active,
+.modal-backdrop-leave-active {
+  transition: opacity 260ms var(--ease-standard);
+}
+
+.modal-backdrop-enter-from,
+.modal-backdrop-leave-to {
+  opacity: 0;
+}
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.mobile-menu-enter-active {
+  transition:
+    opacity 300ms var(--ease-standard),
+    transform 480ms var(--ease-out);
+}
+
+.mobile-menu-leave-active {
+  transition:
+    opacity 220ms var(--ease-standard),
+    transform 320ms var(--ease-standard);
+}
+
+.mobile-menu-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+}
+
+.mobile-menu-enter-to,
+.mobile-menu-leave-from {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 6px, 0);
+}
+
+/* Mobile navigation link stagger */
+
+.mobile-menu-link {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    opacity 420ms var(--ease-standard),
+    transform 620ms var(--ease-out);
+}
+
+.mobile-menu-open .mobile-menu-link {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.mobile-menu-open .mobile-menu-link:nth-child(1) {
+  transition-delay: 60ms;
+}
+
+.mobile-menu-open .mobile-menu-link:nth-child(2) {
+  transition-delay: 100ms;
+}
+
+.mobile-menu-open .mobile-menu-link:nth-child(3) {
+  transition-delay: 140ms;
+}
+
+.mobile-menu-open .mobile-menu-link:nth-child(4) {
+  transition-delay: 180ms;
+}
+
+.mobile-menu-open .mobile-menu-link:nth-child(5) {
+  transition-delay: 220ms;
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .motion-reveal,
+  .motion-reveal.is-revealed,
+  .mobile-menu-link,
+  .mobile-menu-open .mobile-menu-link {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .preview-grid article:hover,
+  .portfolio-list article:hover,
+  .two-packages article:hover,
+  .preview-grid article:hover img,
+  .portfolio-list article:hover .project-shot img {
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   TOUCH DEVICES
+   ========================================================= */
+
+@media (hover: none) {
+  .preview-grid article:hover,
+  .portfolio-list article:hover,
+  .two-packages article:hover,
+  .preview-grid article:hover img,
+  .portfolio-list article:hover .project-shot img {
+    transform: none;
+  }
+
+  :where(
+    .primary-cta,
+    .orange-cta,
+    .outline-cta,
+    .outline-teal,
+    .text-cta,
+    .btn,
+    button:not(.menu-toggle)
+  ):hover {
+    transform: none;
+  }
+}

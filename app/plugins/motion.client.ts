@@ -4,7 +4,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     '.section-heading', '.portfolio-list article', '.portfolio-benefits', '.portfolio-cta',
     '.compare-section', '.pricing-faq', '.pricing-cta', '.inquiry-area > aside',
     '.inquiry-form', '.contact-links', '.contact-faq', '.contact-bottom', '.site-cta',
-    '.site-footer',
   ].join(',')
   const staggerGroups = [
     ['.service-cards', 'article'], ['.preview-grid', 'article'], ['.home-packages', 'article'],
@@ -18,7 +17,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       reveal(entry.target as HTMLElement)
       observer.unobserve(entry.target)
     })
-  }, { threshold: .15, rootMargin: '0px 0px -4% 0px' })
+  }, { threshold: .2, rootMargin: '0px 0px -18% 0px' })
 
   function reveal(element: HTMLElement) {
     element.classList.add('is-revealed')
@@ -26,15 +25,15 @@ export default defineNuxtPlugin((nuxtApp) => {
     window.setTimeout(() => {
       element.classList.remove('motion-reveal', 'is-revealed')
       element.style.removeProperty('--motion-delay')
-    }, 620 + delay)
+    }, 980 + delay)
   }
 
   function prepare(element: HTMLElement, delay = 0) {
     if (element.dataset.motionBound) return
     element.dataset.motionBound = 'true'
-    element.style.setProperty('--motion-delay', `${Math.min(delay, 180)}ms`)
+    element.style.setProperty('--motion-delay', `${80 + Math.min(delay, 180)}ms`)
     element.classList.add('motion-reveal')
-    if (reducedMotion.matches || element.getBoundingClientRect().top < window.innerHeight * .92) {
+    if (reducedMotion.matches || element.getBoundingClientRect().top < window.innerHeight * .8) {
       reveal(element)
       return
     }

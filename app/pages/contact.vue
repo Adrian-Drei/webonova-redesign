@@ -79,6 +79,8 @@ function validate() {
   if (!form.name.trim()) next.name = "Please enter your full name.";
   if (!/^\S+@\S+\.\S+$/.test(form.email))
     next.email = "Please enter a valid email address.";
+  if (!/^[+()\d\s.-]{7,30}$/.test(form.phone.trim()))
+    next.phone = "Please enter a valid phone number.";
   if (!form.service)
     next.service = "Please select the type of website you need.";
   if (form.description.trim().length < 20)
@@ -267,13 +269,16 @@ async function send() {
             >
           </label>
           <label>
-            Phone number
+            Phone number *
             <input
               v-model="form.phone"
               type="tel"
               autocomplete="tel"
               placeholder="+63 9XX XXX XXXX"
+              required
+              :aria-invalid="!!errors.phone"
             >
+            <small v-if="errors.phone">{{ errors.phone }}</small>
           </label>
         </div>
         <fieldset>
