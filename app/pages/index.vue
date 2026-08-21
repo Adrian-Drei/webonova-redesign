@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { projects } from "~/data/projects";
-useSeoMeta({
+usePageSeo({
   title: "Webonova | Modern Websites for Ambitious Businesses",
   description:
-    "Webonova designs fast, modern websites, booking systems, and responsive digital experiences for growing businesses.",
+    "Webonova designs fast, modern websites, booking systems, and responsive digital experiences that help growing businesses build credibility and convert customers.",
+  path: "/",
 });
 const services = [
   [
@@ -73,10 +74,13 @@ const steps = [
         <div class="site-window">
           <div class="window-dots">○ ○ ○</div>
           <img
-            src="/projects/resort.png"
+            src="/projects/resort.webp"
             alt="Luxury resort website displayed on a desktop screen"
-            width="900"
-            height="560"
+            width="1500"
+            height="746"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           >
         </div>
         <div class="dash-card">
@@ -147,7 +151,7 @@ const steps = [
       </div>
       <div class="preview-grid">
         <article v-for="p in projects" :key="p.title">
-          <img :src="p.thumbnail" :alt="p.alt" width="900" height="560" >
+          <img :src="p.thumbnail" :alt="p.alt" width="1500" height="746" loading="lazy" decoding="async" >
           <div>
             <h3>{{ p.title }}</h3>
             <p>{{ p.category }}</p>

@@ -23,7 +23,7 @@ export const projects: Project[] = [
     description:
       "An elegant wedding RSVP experience created for Chris and Micah, combining a romantic visual system with a clear and responsive guest flow.",
     services: ["Strategy", "UX & UI", "Development"],
-    thumbnail: "/projects/wedding.png",
+    thumbnail: "/projects/wedding.webp",
     alt: "Chris and Micah wedding RSVP website welcome screen",
     url: "https://chris-micah.vercel.app/welcome",
     cta: "View client project",
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     description:
       "A cinematic private-resort website concept exploring quiet luxury, immersive storytelling, and effortless discovery.",
     services: ["Strategy", "UX & UI", "Development"],
-    thumbnail: "/projects/resort.png",
+    thumbnail: "/projects/resort.webp",
     alt: "Private resort website at sunset",
     url: "https://template-resort-teal.vercel.app/",
     cta: "View live sample",
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     description:
       "A premium finishing-material showcase concept featuring architectural interiors, material collections, and clear inquiry paths.",
     services: ["Strategy", "UX & UI", "Development"],
-    thumbnail: "/projects/construction.png",
+    thumbnail: "/projects/construction.webp",
     alt: "Motion Construction architectural materials website",
     url: "https://motionconstruction.vercel.app/",
     cta: "View live sample",
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     description:
       "A resort-booking platform concept with destination discovery, property selection, date controls, and a streamlined reservation flow.",
     services: ["Strategy", "UX & UI", "Development"],
-    thumbnail: "/projects/booking.png",
+    thumbnail: "/projects/booking.webp",
     alt: "Resort booking platform search interface",
     url: "https://booking-template-ashy.vercel.app/",
     cta: "View live sample",

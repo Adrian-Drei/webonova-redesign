@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'admin' })
-useSeoMeta({ title: 'Admin sign in · Webonova', robots: 'noindex,nofollow' })
+useSeoMeta({ title: 'Admin sign in · Webonova', robots: 'noindex, nofollow' })
 const auth = useAuthStore()
 const { loading: busy, error } = storeToRefs(auth)
 const route = useRoute()

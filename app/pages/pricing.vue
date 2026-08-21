@@ -1,8 +1,9 @@
 <script setup lang="ts">
-useSeoMeta({
-  title: "Website Packages | Webonova",
+usePageSeo({
+  title: "Website Design Packages and Pricing | Webonova",
   description:
-    "Clear website pricing: Essential at ₱10,000 and Premium at ₱25,000.",
+    "Compare Webonova website packages: Essential at ₱10,000 and Premium at ₱25,000, with responsive design and three revision rounds included.",
+  path: "/pricing",
 });
 const essential = [
   "Responsive mobile and desktop design",

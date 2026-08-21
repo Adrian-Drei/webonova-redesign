@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { projects, type Project } from "~/data/projects";
-useSeoMeta({
-  title: "Selected Work | Webonova",
+usePageSeo({
+  title: "Website Design Portfolio and Selected Work | Webonova",
   description:
-    "Websites designed to make businesses stand out across hospitality, construction, booking, and events.",
+    "Explore Webonova website projects across hospitality, construction, booking, and events, including responsive client work and self-initiated digital concepts.",
+  path: "/work",
+  image: "/projects/resort.webp",
+  imageAlt: "Private resort website featured in the Webonova portfolio",
+  imageWidth: 1500,
+  imageHeight: 746,
 });
 const route = useRoute(),
   router = useRouter();
@@ -67,9 +72,10 @@ watch(filter, (v) =>
           <img
             :src="p.thumbnail"
             :alt="p.alt"
-            width="900"
-            height="560"
-            :loading="i < 2 ? 'eager' : 'lazy'"
+            width="1500"
+            height="746"
+            loading="lazy"
+            decoding="async"
           >
         </div>
         <div class="project-copy">

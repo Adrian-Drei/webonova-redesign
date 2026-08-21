@@ -1,7 +1,9 @@
 <script setup lang="ts">
-useSeoMeta({
-  title: "Start a Conversation | Webonova",
-  description: "Tell Webonova about your business and website goals.",
+usePageSeo({
+  title: "Start a Website Design Project | Webonova",
+  description:
+    "Tell Webonova about your business, website goals, preferred package, and timeline. We typically reply within one to two business days.",
+  path: "/contact",
 });
 const route = useRoute();
 const startedAt = Date.now();
@@ -112,7 +114,7 @@ async function send() {
     status.value = "error";
     message.value =
       failure.data?.statusMessage ||
-      "We could not save your inquiry. Please try again or email webonovatech@gmail.com.";
+      "We could not save your inquiry. Please try again or email webonovasupport@gmail.com.";
     submission.fail(message.value);
   }
 }
@@ -185,7 +187,7 @@ async function send() {
             <small>
               Email
               <br >
-              <a href="mailto:webonovatech@gmail.com">webonovatech@gmail.com</a>
+              <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
             </small>
           </b>
           <b>
@@ -205,7 +207,7 @@ async function send() {
             </small>
           </b>
         </div>
-        <div class="after-submit">
+        <div class="after-submit space-y-3">
           <h3>What happens after you submit?</h3>
           <p>
             <b>01</b>
@@ -226,7 +228,7 @@ async function send() {
           <strong>View Projects ↗</strong>
         </NuxtLink>
       </aside>
-      <form class="inquiry-form" novalidate @submit.prevent="send">
+      <form id="project-inquiry" class="inquiry-form" novalidate @submit.prevent="send">
         <div class="form-heading">
           <h2>Project inquiry</h2>
           <small>Fields marked with * are required.</small>
@@ -247,7 +249,7 @@ async function send() {
               placeholder="Your name"
               :aria-invalid="!!errors.name"
             >
-            <small v-if="errors.name">{{ errors.name }}</small>
+            <small v-if="errors.name" role="alert">{{ errors.name }}</small>
           </label>
           <label>
             Email address *
@@ -258,7 +260,7 @@ async function send() {
               placeholder="you@example.com"
               :aria-invalid="!!errors.email"
             >
-            <small v-if="errors.email">{{ errors.email }}</small>
+            <small v-if="errors.email" role="alert">{{ errors.email }}</small>
           </label>
           <label>
             Business or brand name
@@ -278,7 +280,7 @@ async function send() {
               required
               :aria-invalid="!!errors.phone"
             >
-            <small v-if="errors.phone">{{ errors.phone }}</small>
+            <small v-if="errors.phone" role="alert">{{ errors.phone }}</small>
           </label>
         </div>
         <fieldset>
@@ -294,7 +296,7 @@ async function send() {
               <span>{{ s[2] }}</span>
             </label>
           </div>
-          <small v-if="errors.service" class="field-error">
+          <small v-if="errors.service" class="field-error" role="alert">
             {{ errors.service }}
           </small>
         </fieldset>
@@ -351,14 +353,14 @@ async function send() {
             :aria-invalid="!!errors.description"
           ></textarea>
           <small>{{ form.description.length }} / 1,500</small>
-          <em v-if="errors.description">{{ errors.description }}</em>
+          <em v-if="errors.description" role="alert">{{ errors.description }}</em>
         </label>
         <label class="consent">
           <input v-model="form.consent" type="checkbox" >
           I agree that Webonova may use the information provided to respond to
           my inquiry.
         </label>
-        <small v-if="errors.consent" class="field-error">
+        <small v-if="errors.consent" class="field-error" role="alert">
           {{ errors.consent }}
         </small>
         <label class="honeypot" aria-hidden="true">
@@ -407,7 +409,7 @@ async function send() {
             <strong>View Work ↗</strong>
           </span>
         </NuxtLink>
-        <a href="mailto:webonovatech@gmail.com">
+        <a href="mailto:webonovasupport@gmail.com">
           <i>◌</i>
           <span>
             <b>Ask a Quick Question</b>
@@ -461,7 +463,7 @@ async function send() {
     <section class="contact-bottom">
       <h2>You don’t need to have everything figured out.</h2>
       <p>Start with what you know. We’ll help organize the rest.</p>
-      <a class="orange-cta" href="#main">Send Your Inquiry</a>
+      <a class="orange-cta" href="#project-inquiry">Send Your Inquiry</a>
     </section>
   </div>
 </template>

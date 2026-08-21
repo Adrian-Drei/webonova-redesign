@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'admin', middleware: 'admin' })
-useSeoMeta({ title: 'Contact inquiries · Webonova Admin', robots: 'noindex,nofollow' })
+useSeoMeta({ title: 'Contact inquiries · Webonova Admin', robots: 'noindex, nofollow' })
 
 type Status = 'new' | 'contacted' | 'in_progress' | 'converted' | 'archived'
 interface Inquiry { id:string; created_at:string; updated_at:string; name:string; email:string; company:string|null; phone:string|null; service:string; package:string; launch_timeline:string|null; budget:string|null; description:string; status:Status; internal_notes:string|null; contacted_at:string|null }

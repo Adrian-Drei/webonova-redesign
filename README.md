@@ -40,6 +40,15 @@ bun run dev
 
 ## Production
 
+Set the public production origin before building so canonical URLs, social
+metadata, robots.txt, sitemap.xml, and structured data use the deployed domain:
+
+```env
+NUXT_PUBLIC_SITE_URL=https://webonova.ph
+```
+
+Use the canonical HTTPS origin without a trailing slash.
+
 Build the application for production:
 
 ```bash

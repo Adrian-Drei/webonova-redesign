@@ -20,7 +20,7 @@ watch(isOpen, open => { document.body.style.overflow = open ? 'hidden' : '' })
             <i aria-hidden="true">✓</i><p>INQUIRY RECEIVED</p><h2 :id="`submission-${status}-title`">Thank you, {{ firstName }}.</h2><span :id="`submission-${status}-message`">{{ message }}</span><button class="primary-cta" type="button" @click="submission.close()">Done</button>
           </div>
           <div v-else class="modal-state modal-failed" role="alert">
-            <i aria-hidden="true">!</i><p>SUBMISSION FAILED</p><h2 :id="`submission-${status}-title`">We couldn’t send that.</h2><span :id="`submission-${status}-message`">{{ message }}</span><div><button class="primary-cta" type="button" @click="submission.close()">Try again</button><a href="mailto:webonovatech@gmail.com">Email us instead</a></div>
+            <i aria-hidden="true">!</i><p>SUBMISSION FAILED</p><h2 :id="`submission-${status}-title`">We couldn’t send that.</h2><span :id="`submission-${status}-message`">{{ message }}</span><div><button class="primary-cta" type="button" @click="submission.close()">Try again</button><a href="mailto:webonovasupport@gmail.com">Email us instead</a></div>
           </div>
         </section>
       </div>

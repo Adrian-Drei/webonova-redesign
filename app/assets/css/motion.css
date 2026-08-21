@@ -96,13 +96,6 @@
   animation: hero-enter 650ms var(--ease-out) both;
 }
 
-.nova-hero h1,
-.portfolio-hero h1,
-.pricing-hero h1,
-.contact-hero h1 {
-  animation: hero-enter 780ms var(--ease-out) 90ms both;
-}
-
 .nova-hero .hero-copy > p:not(.kicker),
 .portfolio-hero > div > span,
 .pricing-hero > div:first-child > span,

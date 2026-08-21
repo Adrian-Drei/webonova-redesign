@@ -137,7 +137,7 @@ onBeforeUnmount(() => {
           </p>
           <div class="mobile-nav-meta">
             <p>Available for new projects</p>
-            <a href="mailto:webonovatech@gmail.com">webonovatech@gmail.com</a>
+            <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
             <span>Philippines · Working worldwide</span>
             <small>© 2026 Webonova</small>
           </div>
@@ -169,7 +169,7 @@ onBeforeUnmount(() => {
           <br >
           ambitious businesses.
         </p>
-        <a href="mailto:webonovatech@gmail.com">webonovatech@gmail.com</a>
+        <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
       </div>
       <div>
         <b>NAVIGATION</b>
