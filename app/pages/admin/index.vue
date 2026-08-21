@@ -127,6 +127,7 @@ onUnmounted(() => { if (channel) client.removeChannel(channel) })
       </section>
     </section>
 
+    <Transition name="inquiry-drawer">
     <aside v-if="selected" class="inquiry-detail">
       <header><div><h2>Inquiry details</h2><span class="status-pill" :class="selected.status">{{ label(selected.status) }}</span></div><button aria-label="Close details" @click="selected=null"><Icon name="lucide:x" /></button></header>
       <div class="contact-person"><span class="admin-avatar large">{{ selected.name.split(' ').map(n=>n[0]).slice(0,2).join('') }}</span><div><b>{{ selected.name }}</b><a :href="`mailto:${selected.email}`">{{ selected.email }}</a><a v-if="selected.phone" :href="`tel:${selected.phone}`">{{ selected.phone }}</a></div></div>
@@ -138,5 +139,6 @@ onUnmounted(() => { if (channel) client.removeChannel(channel) })
       <div class="save-row"><button :disabled="saving" @click="save()">{{ saving ? 'Saving…' : 'Save changes' }}</button><span :class="{error:notice!=='Saved'}">{{ notice }}</span></div>
       <section class="timeline"><h3>Activity timeline</h3><article><i></i><div><b>Inquiry submitted</b><small>{{ formatDateTime(selected.created_at) }}</small></div></article><article v-for="event in activities" :key="event.id"><i></i><div><b>{{ event.action }}</b><small>{{ formatDateTime(event.created_at) }}</small></div></article></section>
     </aside>
+    </Transition>
   </div>
 </template>

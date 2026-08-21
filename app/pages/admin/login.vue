@@ -17,7 +17,7 @@ async function login() {
 <template>
   <section class="admin-login">
     <div class="login-panel">
-      <NuxtLink class="admin-brand" to="/">WEBONOVA</NuxtLink>
+      <NuxtLink class="admin-brand login-logo" to="/" aria-label="Webonova home"><BrandLogo variant="dark" /></NuxtLink>
       <span class="eyebrow">SECURE ADMIN AREA</span>
       <h1>Welcome back.</h1>
       <p>Sign in to review and manage project inquiries.</p>
