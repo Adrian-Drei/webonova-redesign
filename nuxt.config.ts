@@ -4,7 +4,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     supabaseUrl: process.env.SUPABASE_URL,
     supabasePublishableKey: process.env.SUPABASE_KEY,
-    public: { siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://webonova.ph' },
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.webonova.com',
+      facebookAppId: process.env.NUXT_PUBLIC_FACEBOOK_APP_ID || '',
+    },
   },
   app: { pageTransition:{name:'page'}, head: { htmlAttrs:{lang:'en'}, link:[{rel:'icon',href:'/favicon.ico'},{rel:'apple-touch-icon',href:'/brand/webonova-mark.webp'}], meta:[{name:'theme-color',content:'#031923'}] } },
   compatibilityDate: "2025-07-15",

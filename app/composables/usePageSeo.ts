@@ -11,8 +11,12 @@ interface PageSeoOptions {
 export function usePageSeo(options: PageSeoOptions) {
   const config = useRuntimeConfig();
   const siteUrl = String(config.public.siteUrl).replace(/\/$/, "");
-  const canonical = `${siteUrl}${options.path === "/" ? "" : options.path}`;
-  const image = `${siteUrl}${options.image || "/og.webp"}`;
+  const canonical = `${siteUrl}${options.path === "/" ? "/" : options.path}`;
+  const imagePath = options.image || "/og.png";
+  const image = `${siteUrl}${imagePath}`;
+  const imageType = imagePath.toLowerCase().endsWith(".png")
+    ? "image/png"
+    : "image/webp";
 
   useSeoMeta({
     title: options.title,
@@ -26,6 +30,7 @@ export function usePageSeo(options: PageSeoOptions) {
       options.imageAlt || "Webonova website design and development preview",
     ogImageWidth: options.imageWidth || 1200,
     ogImageHeight: options.imageHeight || 630,
+    ogImageType: imageType,
     ogSiteName: "Webonova",
     twitterCard: "summary_large_image",
     twitterTitle: options.title,
@@ -34,5 +39,15 @@ export function usePageSeo(options: PageSeoOptions) {
     twitterImageAlt:
       options.imageAlt || "Webonova website design and development preview",
   });
-  useHead({ link: [{ rel: "canonical", href: canonical }] });
+  useHead({
+    link: [{ rel: "canonical", href: canonical }],
+    meta: config.public.facebookAppId
+      ? [
+          {
+            property: "fb:app_id",
+            content: String(config.public.facebookAppId),
+          },
+        ]
+      : [],
+  });
 }

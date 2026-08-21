@@ -17,7 +17,7 @@ useHead({
           name: "Webonova",
           url: siteUrl,
           logo: `${siteUrl}/brand/webonova-logo.webp`,
-          image: `${siteUrl}/og.webp`,
+          image: `${siteUrl}/og.png`,
           email: "webonovasupport@gmail.com",
           areaServed: "Worldwide",
           description:
