@@ -177,7 +177,7 @@ function toggleFaq(index: number) {
     </section>
     <section class="compare-section">
       <h2>Compare the packages</h2>
-      <div class="comparison" role="table" aria-label="Package comparison">
+      <div class="comparison !mt-5" role="table" aria-label="Package comparison">
         <div class="comparison-head" role="row">
           <b>Feature</b>
           <b>Essential</b>
