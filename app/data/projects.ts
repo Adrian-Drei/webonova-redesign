@@ -15,17 +15,17 @@ export type Project = {
 export const projects: Project[] = [
   {
     number: "01",
-    title: "Chris & Micah Wedding RSVP",
-    status: "client",
+    title: "Alex & Jamie Wedding RSVP",
+    status: "concept",
     industry: "Events",
     category: "Wedding / RSVP Experience",
     year: 2026,
     description:
-      "An elegant wedding RSVP experience created for Chris and Micah, combining a romantic visual system with a clear and responsive guest flow.",
+      "An elegant wedding RSVP experience created for Alex and Jamie, combining a romantic visual system with a clear and responsive guest flow.",
     services: ["Strategy", "UX & UI", "Development"],
     thumbnail: "/projects/wedding.webp",
-    alt: "Chris and Micah wedding RSVP website welcome screen",
-    url: "https://chris-micah.vercel.app/welcome",
+    alt: "Alex and Jamie wedding RSVP website welcome screen",
+    url: "https://wedding-rsvp-beige-sigma.vercel.app/",
     cta: "View client project",
   },
   {
