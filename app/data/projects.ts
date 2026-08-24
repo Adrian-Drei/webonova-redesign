@@ -73,4 +73,19 @@ export const projects: Project[] = [
     url: "https://booking-template-ashy.vercel.app/",
     cta: "View live sample",
   },
+  {
+    number: "05",
+    title: "The Seasonal Table",
+    status: "concept",
+    industry: "Hospitality",
+    category: "Restaurant Website",
+    year: 2026,
+    description:
+      "An elegant restaurant website concept built around seasonal dining, signature dishes, immersive imagery, and a clear table-reservation journey.",
+    services: ["Strategy", "UX & UI", "Development"],
+    thumbnail: "/projects/restaurant.webp",
+    alt: "The Seasonal Table restaurant website featuring seasonal cuisine",
+    url: "https://restaurant-template-one-alpha.vercel.app/",
+    cta: "View live sample",
+  },
 ];
