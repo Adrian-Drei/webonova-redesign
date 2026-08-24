@@ -45,7 +45,7 @@ export const projects: Project[] = [
   },
   {
     number: "03",
-    title: "Motion Construction",
+    title: "Buildstone Construction",
     status: "concept",
     industry: "Construction",
     category: "Product Showcase",
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     services: ["Strategy", "UX & UI", "Development"],
     thumbnail: "/projects/construction.webp",
     alt: "Motion Construction architectural materials website",
-    url: "https://motionconstruction.vercel.app/",
+    url: "https://construction-template-ochre.vercel.app/",
     cta: "View live sample",
   },
   {
