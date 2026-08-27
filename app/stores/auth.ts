@@ -11,13 +11,32 @@ export const useAuthStore = defineStore('auth', () => {
   const isAdmin = computed(() => user.value?.app_metadata?.role === 'admin')
   const email = computed(() => user.value?.email || '')
   const initials = computed(() => email.value.slice(0, 2).toUpperCase())
+  let initializationPromise: Promise<void> | null = null
 
-  async function initialize() {
-    if (initialized.value) return
-    const { data, error: authError } = await client.auth.getUser()
-    user.value = data.user
-    error.value = authError?.message || ''
-    initialized.value = true
+  async function initialize(force = false) {
+    if (initialized.value && !force) return
+    if (initializationPromise) return initializationPromise
+
+    initializationPromise = (async () => {
+      const { data: sessionData, error: sessionError } = await client.auth.getSession()
+      if (sessionError || !sessionData.session) {
+        user.value = null
+        error.value = sessionError?.message || ''
+        initialized.value = true
+        return
+      }
+
+      const { data, error: authError } = await client.auth.getUser()
+      user.value = data.user
+      error.value = authError?.message || ''
+      initialized.value = true
+    })()
+
+    try {
+      await initializationPromise
+    } finally {
+      initializationPromise = null
+    }
   }
 
   async function login(credentials: { email: string; password: string }) {

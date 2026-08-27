@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       microsoftClarityId: process.env.NUXT_PUBLIC_MICROSOFT_CLARITY_ID || '',
     },
   },
-  app: { pageTransition:{name:'page'}, head: { htmlAttrs:{lang:'en'}, link:[{rel:'icon',href:'/favicon.ico'},{rel:'apple-touch-icon',href:'/brand/webonova-mark.webp'}], meta:[{name:'theme-color',content:'#031923'}] } },
+  app: { pageTransition:{name:'page'}, head: { htmlAttrs:{lang:'en'}, link:[{rel:'icon',type:'image/png',href:'/favicon.png'},{rel:'icon',type:'image/x-icon',href:'/favicon.ico'},{rel:'apple-touch-icon',href:'/favicon.png'}], meta:[{name:'theme-color',content:'#031923'}] } },
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   modules: [
@@ -24,6 +24,12 @@ export default defineNuxtConfig({
   ],
   supabase: {
     redirect: false,
+    useSsrCookies: true,
+    cookieOptions: {
+      maxAge: 60 * 60 * 24 * 30,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    },
   },
   nitro:{prerender:{routes:['/','/work','/pricing','/contact','/sitemap.xml','/robots.txt']}},
   routeRules:{

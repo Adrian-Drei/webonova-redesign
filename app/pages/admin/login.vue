@@ -9,6 +9,9 @@ const password = ref('')
 if (route.query.unauthorized) auth.error = 'This account does not have administrator access.'
 else auth.clearError()
 
+await auth.initialize()
+if (auth.isAuthenticated && auth.isAdmin) await navigateTo('/admin')
+
 async function login() {
   if (await auth.login({ email: email.value, password: password.value })) await navigateTo('/admin')
 }

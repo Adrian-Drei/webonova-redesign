@@ -1,8 +1,9 @@
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   const auth = useAuthStore()
   const client = useSupabaseClient()
 
-  auth.initialize()
+  // Always restore the browser's persisted Supabase session after hydration.
+  await auth.initialize(true)
   const { data: listener } = client.auth.onAuthStateChange((_event, session) => {
     auth.syncUser(session?.user || null)
   })

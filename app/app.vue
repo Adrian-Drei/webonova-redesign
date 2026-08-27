@@ -49,7 +49,7 @@ useHead({
           "@id": `${siteUrl}/#organization`,
           name: "Webonova",
           url: siteUrl,
-          logo: `${siteUrl}/brand/webonova-logo.webp`,
+          logo: `${siteUrl}/brand/webonova-logo-dark.webp`,
           image: `${siteUrl}/og.png`,
           email: "webonovasupport@gmail.com",
           areaServed: "Worldwide",
