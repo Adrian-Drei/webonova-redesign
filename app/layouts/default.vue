@@ -138,6 +138,7 @@ onBeforeUnmount(() => {
           <div class="mobile-nav-meta">
             <p>Available for new projects</p>
             <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
+            <a href="viber://chat?number=%2B639456028734">Viber: 0945 602 8734</a>
             <span>Philippines · Working worldwide</span>
             <small>© 2026 Webonova</small>
           </div>
@@ -170,6 +171,7 @@ onBeforeUnmount(() => {
           ambitious businesses.
         </p>
         <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
+        <a href="viber://chat?number=%2B639456028734">Viber: 0945 602 8734</a>
       </div>
       <div>
         <b>NAVIGATION</b>

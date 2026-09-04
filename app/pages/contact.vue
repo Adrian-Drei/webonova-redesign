@@ -6,6 +6,9 @@ usePageSeo({
   path: "/contact",
 });
 const route = useRoute();
+const { region, priceFor } = usePricingRegion();
+const essentialPrice = computed(() => priceFor("essential"));
+const premiumPrice = computed(() => priceFor("premium"));
 const startedAt = Date.now();
 const services = [
   ["business", "▣", "Business Website"],
@@ -98,10 +101,20 @@ async function send() {
   status.value = "sending";
   message.value = "";
   submission.start(form.name);
+  const selectedPrice =
+    form.package === "essential" || form.package === "premium"
+      ? priceFor(form.package)
+      : null;
   try {
     await $fetch("/api/inquiries", {
       method: "POST",
-      body: { ...form, startedAt },
+      body: {
+        ...form,
+        startedAt,
+        pricingRegion: region.value,
+        pricingCurrency: selectedPrice?.currency || null,
+        pricingAmount: selectedPrice?.amount || null,
+      },
     });
     status.value = "success";
     message.value =
@@ -188,6 +201,14 @@ async function send() {
               Email
               <br >
               <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
+            </small>
+          </b>
+          <b>
+            ◉
+            <small>
+              Viber
+              <br >
+              <a href="viber://chat?number=%2B639456028734">0945 602 8734</a>
             </small>
           </b>
           <b>
@@ -307,14 +328,14 @@ async function send() {
               <input v-model="form.package" type="radio" value="essential" >
               <span>
                 <b>Essential</b>
-                <small>₱10,000</small>
+                <small>{{ essentialPrice.label }}</small>
               </span>
             </label>
             <label :class="{ selected: form.package === 'premium' }">
               <input v-model="form.package" type="radio" value="premium" >
               <span>
                 <b>Premium</b>
-                <small>₱25,000</small>
+                <small>{{ premiumPrice.label }}</small>
               </span>
             </label>
             <label :class="{ selected: form.package === 'unsure' }">
@@ -338,8 +359,12 @@ async function send() {
             Estimated budget
             <select v-model="form.budget">
               <option value="">Select a budget range</option>
-              <option>₱10,000</option>
-              <option>₱25,000</option>
+              <option :value="essentialPrice.label">
+                {{ essentialPrice.label }}
+              </option>
+              <option :value="premiumPrice.label">
+                {{ premiumPrice.label }}
+              </option>
             </select>
           </label>
         </div>

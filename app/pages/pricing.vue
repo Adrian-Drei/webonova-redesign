@@ -2,9 +2,12 @@
 usePageSeo({
   title: "Website Design Packages and Pricing | Webonova",
   description:
-    "Compare Webonova website packages: Essential at ₱10,000 and Premium at ₱25,000, with responsive design and three revision rounds included.",
+    "Compare Webonova website packages, including regional Essential pricing for Philippine and international clients.",
   path: "/pricing",
 });
+const { region, selectRegion, priceFor } = usePricingRegion();
+const essentialPrice = computed(() => priceFor("essential"));
+const premiumPrice = computed(() => priceFor("premium"));
 const essential = [
   "Responsive mobile and desktop design",
   "Accommodation or service listings",
@@ -122,10 +125,35 @@ function toggleFaq(index: number) {
     <section class="package-choice">
       <p>CHOOSE YOUR PACKAGE</p>
       <h2>Start simple—or give your business room to grow.</h2>
+      <div class="region-selector" aria-label="Pricing region">
+        <span>Show pricing for</span>
+        <div role="group" aria-label="Select your pricing region">
+          <button
+            type="button"
+            :aria-pressed="region === 'PH'"
+            :class="{ active: region === 'PH' }"
+            @click="selectRegion('PH')"
+          >
+            Philippines
+          </button>
+          <button
+            type="button"
+            :aria-pressed="region === 'INTERNATIONAL'"
+            :class="{ active: region === 'INTERNATIONAL' }"
+            @click="selectRegion('INTERNATIONAL')"
+          >
+            International
+          </button>
+        </div>
+      </div>
+      <p class="region-note">
+        Prices shown in PHP for clients in the Philippines and USD for
+        international clients.
+      </p>
       <div class="two-packages">
         <article>
           <h3>ESSENTIAL</h3>
-          <strong>₱10,000</strong>
+          <strong>{{ essentialPrice.label }}</strong>
           <p>
             For businesses that need a polished and professional online
             presence.
@@ -144,7 +172,7 @@ function toggleFaq(index: number) {
         <article class="premium-card">
           <span>MOST POPULAR</span>
           <h3>PREMIUM</h3>
-          <strong>₱25,000</strong>
+          <strong>{{ premiumPrice.label }}</strong>
           <p>
             For businesses that need a custom website and tools to manage
             content and inquiries.

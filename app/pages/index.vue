@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { projects } from "~/data/projects";
+const { priceFor } = usePricingRegion();
+const essentialPrice = computed(() => priceFor("essential"));
+const premiumPrice = computed(() => priceFor("premium"));
 usePageSeo({
   title: "Webonova | Modern Websites for Ambitious Businesses",
   description:
@@ -168,7 +171,7 @@ const steps = [
       <div class="home-packages">
         <article>
           <p class="package-name">ESSENTIAL</p>
-          <h3>₱10,000</h3>
+          <h3>{{ essentialPrice.label }}</h3>
           <p>A polished online presence for growing businesses.</p>
           <ul>
             <li>Up to 5 pages</li>
@@ -184,7 +187,7 @@ const steps = [
         <article class="featured">
           <span>MOST POPULAR</span>
           <p class="package-name">PREMIUM</p>
-          <h3>₱25,000</h3>
+          <h3>{{ premiumPrice.label }}</h3>
           <p>A complete website with tools to manage content and inquiries.</p>
           <ul>
             <li>Up to 10 pages</li>

@@ -3,7 +3,7 @@ definePageMeta({ layout: 'admin', middleware: 'admin' })
 useSeoMeta({ title: 'Contact inquiries · Webonova Admin', robots: 'noindex, nofollow' })
 
 type Status = 'new' | 'contacted' | 'in_progress' | 'converted' | 'archived'
-interface Inquiry { id:string; created_at:string; updated_at:string; name:string; email:string; company:string|null; phone:string|null; service:string; package:string; launch_timeline:string|null; budget:string|null; description:string; status:Status; internal_notes:string|null; contacted_at:string|null }
+interface Inquiry { id:string; created_at:string; updated_at:string; name:string; email:string; company:string|null; phone:string|null; service:string; package:string; pricing_region:'PH'|'INTERNATIONAL'|null; pricing_currency:'PHP'|'USD'|null; pricing_amount:number|null; launch_timeline:string|null; budget:string|null; description:string; status:Status; internal_notes:string|null; contacted_at:string|null }
 interface Activity { id:number; action:string; details:string|null; created_at:string }
 
 const client = useSupabaseClient()
@@ -56,6 +56,10 @@ const activityDays = computed(() => {
 function label(value:string) { return value.replaceAll('_', ' ').replace(/\b\w/g, c => c.toUpperCase()) }
 function formatDate(value:string) { return new Intl.DateTimeFormat('en-PH', { dateStyle:'medium' }).format(new Date(value)) }
 function formatDateTime(value:string) { return new Intl.DateTimeFormat('en-PH', { dateStyle:'medium', timeStyle:'short' }).format(new Date(value)) }
+function formatPrice(item:Inquiry) {
+  if (!item.pricing_currency || !item.pricing_amount) return ''
+  return new Intl.NumberFormat(item.pricing_currency === 'PHP' ? 'en-PH' : 'en-US', { style:'currency', currency:item.pricing_currency, maximumFractionDigits:0 }).format(item.pricing_amount)
+}
 async function choose(item:Inquiry) {
   selected.value = { ...item }
   const { data } = await client.from('inquiry_activities').select('id,action,details,created_at').eq('inquiry_id', item.id).order('created_at', { ascending:false })
@@ -119,7 +123,7 @@ onUnmounted(() => { if (channel) client.removeChannel(channel) })
           <label><Icon name="lucide:search" /><input v-model="search" placeholder="Search inquiries…"></label>
           <select v-model="statusFilter"><option value="all">All statuses</option><option v-for="s in ['new','contacted','in_progress','converted','archived']" :key="s" :value="s">{{ label(s) }}</option></select>
           <select v-model="serviceFilter"><option value="all">All project types</option><option v-for="s in uniqueServices" :key="s" :value="s">{{ label(s) }}</option></select>
-          <select v-model="packageFilter"><option value="all">All packages</option><option value="essential">Essential · ₱10K</option><option value="premium">Premium · ₱25K</option><option value="unsure">Not sure yet</option></select>
+          <select v-model="packageFilter"><option value="all">All packages</option><option value="essential">Essential</option><option value="premium">Premium</option><option value="unsure">Not sure yet</option></select>
         </div>
         <div v-if="loadStatus === 'pending'" class="admin-empty-state">Loading inquiries…</div>
         <div v-else-if="!filtered.length" class="admin-empty-state"><Icon name="lucide:inbox" /><b>No inquiries found</b><span>New contact form submissions will appear here.</span></div>
@@ -132,7 +136,7 @@ onUnmounted(() => { if (channel) client.removeChannel(channel) })
       <header><div><h2>Inquiry details</h2><span class="status-pill" :class="selected.status">{{ label(selected.status) }}</span></div><button aria-label="Close details" @click="selected=null"><Icon name="lucide:x" /></button></header>
       <div class="contact-person"><span class="admin-avatar large">{{ selected.name.split(' ').map(n=>n[0]).slice(0,2).join('') }}</span><div><b>{{ selected.name }}</b><a :href="`mailto:${selected.email}`">{{ selected.email }}</a><a v-if="selected.phone" :href="`tel:${selected.phone}`">{{ selected.phone }}</a></div></div>
       <div class="detail-actions"><a :href="`mailto:${selected.email}`"><Icon name="lucide:mail" /> Email</a><a v-if="selected.phone" :href="`tel:${selected.phone}`"><Icon name="lucide:phone" /> Call</a><button @click="markContacted">Mark as contacted</button></div>
-      <dl><dt>Business</dt><dd>{{ selected.company || '—' }}</dd><dt>Project type</dt><dd>{{ label(selected.service) }}</dd><dt>Package interest</dt><dd>{{ label(selected.package) }}{{ selected.package==='premium'?' — ₱25,000':selected.package==='essential'?' — ₱10,000':'' }}</dd><dt>Preferred timeline</dt><dd>{{ selected.launch_timeline || 'Flexible' }}</dd><dt>Estimated budget</dt><dd>{{ selected.budget || 'Not specified' }}</dd><dt>Submitted</dt><dd>{{ formatDateTime(selected.created_at) }}</dd></dl>
+      <dl><dt>Business</dt><dd>{{ selected.company || '—' }}</dd><dt>Project type</dt><dd>{{ label(selected.service) }}</dd><dt>Package interest</dt><dd>{{ label(selected.package) }}{{ formatPrice(selected) ? ` — ${formatPrice(selected)}` : '' }}</dd><dt>Pricing region</dt><dd>{{ selected.pricing_region ? label(selected.pricing_region) : 'Not recorded' }}</dd><dt>Preferred timeline</dt><dd>{{ selected.launch_timeline || 'Flexible' }}</dd><dt>Estimated budget</dt><dd>{{ selected.budget || 'Not specified' }}</dd><dt>Submitted</dt><dd>{{ formatDateTime(selected.created_at) }}</dd></dl>
       <section class="brief"><h3>Project brief</h3><p>{{ selected.description }}</p></section>
       <label class="detail-field">Status<select v-model="selected.status"><option v-for="s in ['new','contacted','in_progress','converted','archived']" :key="s" :value="s">{{ label(s) }}</option></select></label>
       <label class="detail-field">Internal notes<textarea v-model="selected.internal_notes" rows="4" placeholder="Add a private note…"></textarea></label>
