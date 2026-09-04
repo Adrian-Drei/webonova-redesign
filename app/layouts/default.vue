@@ -138,7 +138,14 @@ onBeforeUnmount(() => {
           <div class="mobile-nav-meta">
             <p>Available for new projects</p>
             <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
-            <a href="viber://chat?number=%2B639456028734">Viber: 0945 602 8734</a>
+            <a
+              class="viber-link"
+              href="viber://chat?number=%2B639456028734"
+              aria-label="Open Viber chat with Webonova at 0945 602 8734"
+            >
+              <Icon name="simple-icons:viber" aria-hidden="true" />
+              <span>Viber: 0945 602 8734</span>
+            </a>
             <span>Philippines · Working worldwide</span>
             <small>© 2026 Webonova</small>
           </div>
@@ -171,7 +178,14 @@ onBeforeUnmount(() => {
           ambitious businesses.
         </p>
         <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
-        <a href="viber://chat?number=%2B639456028734">Viber: 0945 602 8734</a>
+        <a
+          class="viber-link"
+          href="viber://chat?number=%2B639456028734"
+          aria-label="Open Viber chat with Webonova at 0945 602 8734"
+        >
+          <Icon name="simple-icons:viber" aria-hidden="true" />
+          <span>Viber: 0945 602 8734</span>
+        </a>
       </div>
       <div>
         <b>NAVIGATION</b>

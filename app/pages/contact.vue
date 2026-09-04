@@ -203,13 +203,19 @@ async function send() {
               <a href="mailto:webonovasupport@gmail.com">webonovasupport@gmail.com</a>
             </small>
           </b>
-          <b>
-            ◉
-            <small>
-              Viber
-              <br >
-              <a href="viber://chat?number=%2B639456028734">0945 602 8734</a>
-            </small>
+          <b class="viber-fact">
+            <a
+              class="viber-contact-link"
+              href="viber://chat?number=%2B639456028734"
+              aria-label="Open Viber chat with Webonova at 0945 602 8734"
+            >
+              <Icon name="simple-icons:viber" aria-hidden="true" />
+              <small>
+                Viber
+                <br >
+                <span>0945 602 8734</span>
+              </small>
+            </a>
           </b>
           <b>
             ⌖
